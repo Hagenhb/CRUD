@@ -1,0 +1,10 @@
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\bin\Debug\CRUD_User.exe.config
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\bin\Debug\CRUD_User.exe
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\bin\Debug\CRUD_User.pdb
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.Form1.resources
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.Properties.Resources.resources
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.csproj.GenerateResource.cache
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.csproj.CoreCompileInputs.cache
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.exe
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.pdb
+C:\Users\saul.hernandez\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.csprojAssemblyReference.cache
