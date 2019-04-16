@@ -83,4 +83,58 @@ public class ClassData
             return null;
         }
     }
+
+    public DataTable AgregarUsuario(string usuario, string nick, string contrasenia, string correo)
+    {
+        try
+        {
+            using (con = new SqlConnection(connectionString))//Borra lo que tenga en memoria (elimina el objeto) pero no cierra la conexion
+            {
+                DataTable result = new DataTable();
+                cmd = new SqlCommand();
+                cmd.Connection = con;
+
+                cmd.CommandText = String.Format("INSERT INTO USUARIOS VALUES('{0}','{1}','{2}','{3}')", usuario, nick, contrasenia, correo);
+
+                cmd.Connection.Open();
+
+                cmd.ExecuteNonQuery();
+
+                cmd.Connection.Close();
+
+                return null;
+            }
+        }
+        catch (SqlException ex)
+        {
+            return null;
+        }
+    }
+
+    public DataTable ActualizarUsuario(string usuario, string nick, string contrasenia, string correo, int id)
+    {
+        try
+        {
+            using (con = new SqlConnection(connectionString))//Borra lo que tenga en memoria (elimina el objeto) pero no cierra la conexion
+            {
+                DataTable result = new DataTable();
+                cmd = new SqlCommand();
+                cmd.Connection = con;
+
+                cmd.CommandText = String.Format("UPDATE usuarios set usuarios = '{0}', nickname = '{1}', contraseña = '{2}', Email = '{3}' where usuariosid = {4}", usuario, nick, contrasenia, correo, id);
+
+                cmd.Connection.Open();
+
+                cmd.ExecuteNonQuery();
+
+                cmd.Connection.Close();
+
+                return null;
+            }
+        }
+        catch (SqlException ex)
+        {
+            return null;
+        }
+    }
 }

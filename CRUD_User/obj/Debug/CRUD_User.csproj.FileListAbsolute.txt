@@ -18,3 +18,13 @@ C:\Users\Hagenhb\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.csproj.Gen
 C:\Users\Hagenhb\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.csproj.CoreCompileInputs.cache
 C:\Users\Hagenhb\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.exe
 C:\Users\Hagenhb\source\repos\CRUD_User\CRUD_User\obj\Debug\CRUD_User.pdb
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\bin\Debug\CRUD_User.exe.config
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\bin\Debug\CRUD_User.exe
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\bin\Debug\CRUD_User.pdb
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.csprojAssemblyReference.cache
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.Form1.resources
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.Properties.Resources.resources
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.csproj.GenerateResource.cache
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.csproj.CoreCompileInputs.cache
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.exe
+D:\documentos\ReporsitorioVisualStudio\CRUD_usuarios\CRUD_User\obj\Debug\CRUD_User.pdb
