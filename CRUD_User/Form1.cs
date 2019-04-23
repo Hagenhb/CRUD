@@ -12,117 +12,55 @@ namespace CRUD_User
 {
     public partial class Form1 : Form
     {
-        bool b1 = true, b2 = true, b3 = true, b4 = false, b5 = false, b = false;
-        bool esagregar = false;
-        int id = 0, primogeneo = 0;
+        int Id = 0;
+        bool isupdate = false;
+        string usuario;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
                 Limpiar();
+                HabDeshCamp(false);
+                toolGuardar.Enabled = false;
+                toolCancelar.Enabled = false;
 
-                DesHabBtn(b1,b2,b3,b4,b5);
+                //ClassData data = new ClassData();
 
-                DesHabCampo(b);
-
-                ClassData data = new ClassData();
-
-                if (data.IsConnect())
+                /*if (data.IsConnect())
                 {
                     MessageBox.Show("Conexión Exitosa", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     MessageBox.Show("Conexión Fallida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                }*/
 
-                dgvUsers.DataSource = data.LoadData();
-
+                dgvUsers.DataSource = new LinQData().GetUsuarios();
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show("Conexión Fallida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void BtnAgregar_Click(object sender, EventArgs e)
+        private void toolAgregar_Click(object sender, EventArgs e)
         {
-            b1 = b2 = b3 = false;
-            b4 = b5 = b = true;
+            HabDeshCamp(true);
+            toolAgregar.Enabled = false;
+            toolActualizar.Enabled = false;
+            toolBorrar.Enabled = false;
+            toolGuardar.Enabled = true;
+            toolCancelar.Enabled = true;
 
-            DesHabCampo(b);
-            DesHabBtn(b1,b2,b3,b4,b5);
-            esagregar = true;
+            isupdate = false;
+            
         }
-
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            b1 = b2 = b3 = false;
-            b4 = b5 = b = true;
-
-            DesHabCampo(b);
-            DesHabBtn(b1, b2, b3, b4, b5);
-
-            textUsuario.Text = dgvUsers.Rows[id].Cells[1].Value.ToString();
-            textNickname.Text = dgvUsers.Rows[id].Cells[2].Value.ToString();
-            textCont.Text = dgvUsers.Rows[id].Cells[3].Value.ToString();
-            textCorreo.Text = dgvUsers.Rows[id].Cells[4].Value.ToString();
-
-            esagregar = false;
-        }
-
-
-        private void btnBorrar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvUsers_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            var index = dgvUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
-            id = int.Parse(index);
-
-            MessageBox.Show(index, "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            ClassData data = new ClassData();
-
-            if(esagregar == true)
-            {
-                data.AgregarUsuario(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text);
-            }
-            else if(esagregar == false)
-            {
-                data.ActualizarUsuario(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text, id);
-            }
-
-            dgvUsers.DataSource = data.LoadData();
-            this.Refresh();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            b1 = b2 = b3 = true;
-            b4 = b5 = false;
-            b = false;
-
-            DesHabCampo(b);
-
-            DesHabBtn(b1, b2, b3, b4, b5);
-            Limpiar();
-        }
-
-
-
 
         private void Limpiar()
         {
@@ -132,23 +70,149 @@ namespace CRUD_User
             textCorreo.Text = "";
         }
 
-
-        private void DesHabBtn(bool b1, bool b2, bool b3, bool b4, bool b5)
-        {
-            btnActualizar.Enabled = b1;
-            BtnAgregar.Enabled = b2;
-            btnBorrar.Enabled = b3;
-            btnCancelar.Enabled = b4;
-            btnGuardar.Enabled = b5;
-        }
-
-        private void DesHabCampo(bool b)
+        private void HabDeshCamp(bool b)
         {
             textUsuario.Enabled = b;
-            textNickname.Enabled = b;
             textCont.Enabled = b;
+            textNickname.Enabled = b;
             textCorreo.Enabled = b;
         }
-        
+
+        private void toolActualizar_Click(object sender, EventArgs e)
+        {
+            HabDeshCamp(true);
+            toolAgregar.Enabled = false;
+            toolActualizar.Enabled = false;
+            toolBorrar.Enabled = false;
+            toolGuardar.Enabled = true;
+            toolCancelar.Enabled = true;
+
+            isupdate = true;
+        }
+
+        private void toolBorrar_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show(string.Format("¿Está seguro que dese borrar el usuario: [{0}] y todo su contenido?", usuario), "Info", MessageBoxButtons.YesNo);
+            if (resultado == DialogResult.Yes)
+            {
+                var res = new LinQData().BorrarLinQ(Id);
+
+                if (res)
+                {
+                    MessageBox.Show("Se borró la información correctamente", "Usuario Borrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("No se borró la información correctamente", "Usuario No Borrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+            else if (resultado == DialogResult.No)
+            {
+                MessageBox.Show("Operación Cancelada", "Info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            //ClassData data = new ClassData();
+
+            //data.BorrarDato(usuario, Id);
+
+            Limpiar();
+            HabDeshCamp(false);
+            toolAgregar.Enabled = true;
+            toolActualizar.Enabled = true;
+            toolBorrar.Enabled = true;
+            toolGuardar.Enabled = false;
+            toolCancelar.Enabled = false;
+            isupdate = false;
+
+            dgvUsers.DataSource = new LinQData().GetUsuarios();
+
+            this.Refresh();
+        }
+
+        private void toolCancelar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+            HabDeshCamp(false);
+            toolAgregar.Enabled = true;
+            toolActualizar.Enabled = true;
+            toolBorrar.Enabled = true;
+            toolGuardar.Enabled = false;
+            toolCancelar.Enabled = false;
+            isupdate = false;
+        }
+
+        private void dgvUsers_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex > -1)
+            {
+                var userId = dgvUsers.Rows[e.RowIndex].Cells[0].Value.ToString();    //obtención de ID
+                //MessageBox.Show("User Id: " + userId, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Id = int.Parse(userId);
+                usuario = dgvUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
+            }
+        }
+
+        private void dgvUsers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textUsuario.Text = dgvUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
+            textNickname.Text = dgvUsers.Rows[e.RowIndex].Cells[2].Value.ToString();
+            textCont.Text = dgvUsers.Rows[e.RowIndex].Cells[3].Value.ToString();
+            textCorreo.Text = dgvUsers.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+            HabDeshCamp(true);
+            toolAgregar.Enabled = false;
+            toolActualizar.Enabled = false;
+            toolBorrar.Enabled = false;
+            toolGuardar.Enabled = true;
+            toolCancelar.Enabled = true;
+
+            isupdate = true;
+        }
+
+        private void toolGuardar_Click(object sender, EventArgs e)
+        {
+            ClassData data = new ClassData();
+
+            if (isupdate == true)
+            {
+                //data.ActualizaDato(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text, Id);
+                var resultado = new LinQData().ModificarLinQ(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text, Id);
+
+                if(resultado)
+                {
+                    MessageBox.Show("Se actualizó la información correctamente", "Usuario Modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("No se actualizó la información correctamente", "Usuario No Modificado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                //data.InsertaDato(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text);
+                //LinQData dataconlinq = new LinQData();
+
+                //var resultado = dataconlinq.InsertarLinQ(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text);
+                var resultado = new LinQData().InsertarLinQ(textUsuario.Text, textNickname.Text, textCont.Text, textCorreo.Text);
+
+                if (resultado)
+                {
+                    MessageBox.Show("Se guardo la información correctamente","Usuario Agregado",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("No se guardo la información correctamente", "Usuario No Agregado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            dgvUsers.DataSource = new LinQData().GetUsuarios(); //data.LoadData();
+
+            Limpiar();
+            HabDeshCamp(false);
+            toolAgregar.Enabled = true;
+            toolActualizar.Enabled = true;
+            toolBorrar.Enabled = true;
+            toolGuardar.Enabled = false;
+            toolCancelar.Enabled = false;
+            isupdate = false;
+
+            this.Refresh();
+        }
     }
 }
